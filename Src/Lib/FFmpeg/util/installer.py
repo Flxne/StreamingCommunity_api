@@ -158,7 +158,7 @@ def add_install_dir_to_environment_path(install_dir: str) -> None:
 
 def download_ffmpeg():
     """
-    Main function to donwload ffmpeg and add to win path
+    Main function to download ffmpeg and add to win path
     """
         
     # Get FFMPEG download URL
