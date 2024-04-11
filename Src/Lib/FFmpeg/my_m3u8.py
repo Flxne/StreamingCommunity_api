@@ -294,7 +294,7 @@ class M3U8_Segments:
             # Refresh progress bar
             progress_counter.refresh()
 
-    def donwload_streams(self):
+    def download_streams(self):
         """
         Downloads TS segments in parallel using ThreadPoolExecutor.
 
@@ -483,7 +483,7 @@ class Downloader():
         os.makedirs(self.audio_segments_path, exist_ok=True)
         os.makedirs(self.subtitle_segments_path, exist_ok=True)
 
-        # Track subtitle, audio donwload
+        # Track subtitle, audio download
         self.downloaded_audio = []
         self.downloaded_subtitle = []
         self.downloaded_video = []
@@ -667,7 +667,7 @@ class Downloader():
                 audio_m3u8.get_info()
                 
                 # Download the audio segments
-                audio_m3u8.donwload_streams()
+                audio_m3u8.download_streams()
 
     def manage_video(self):
         """
@@ -693,7 +693,7 @@ class Downloader():
         video_m3u8.get_info()
         
         # Download the video segments
-        video_m3u8.donwload_streams()
+        video_m3u8.download_streams()
 
     @staticmethod
     def extract_number(file_name):
