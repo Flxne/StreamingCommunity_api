@@ -347,7 +347,7 @@ class M3U8_Parser:
                     })
 
                 except Exception as e:
-                    logging.error(f"Cant donwload: {name_language}, error: {e}")
+                    logging.error(f"Can't download: {name_language}, error: {e}")
 
             # Return
             return output
