@@ -99,7 +99,7 @@ def display_episodes_list() -> str:
 
 
 # --> DOWNLOAD
-def donwload_video(tv_name: str, index_season_selected: int, index_episode_selected: int) -> None:
+def download_video(tv_name: str, index_season_selected: int, index_episode_selected: int) -> None:
     """
     Download a single episode video.
 
@@ -135,18 +135,18 @@ def donwload_video(tv_name: str, index_season_selected: int, index_episode_selec
         obj_download.download_m3u8()
 
     except Exception as e:
-        logging.error(f"(donwload_video) Error downloading film: {e}")
+        logging.error(f"(download_video) Error downloading film: {e}")
         pass
 
 
-def donwload_episode(tv_name: str, index_season_selected: int, donwload_all: bool = False) -> None:
+def download_episode(tv_name: str, index_season_selected: int, download_all: bool = False) -> None:
     """
     Download all episodes of a season.
 
     Args:
         tv_name (str): Name of the TV series.
         index_season_selected (int): Index of the selected season.
-        donwload_all (bool): Donwload all seasons episodes
+        download_all (bool): Download all seasons episodes
     """
 
     # Clean memory of all episodes
@@ -158,14 +158,14 @@ def donwload_episode(tv_name: str, index_season_selected: int, donwload_all: boo
     episodes_count = video_source.obj_episode_manager.get_length()
 
     # Download all episodes wihtout ask
-    if donwload_all:
+    if download_all:
         for i_episode in range(1, episodes_count+1):
-            donwload_video(tv_name, index_season_selected, i_episode)
+            download_video(tv_name, index_season_selected, i_episode)
 
         console.print(f"\n[red]Download [yellow]season: [red]{index_season_selected}.")
 
     # If not download all episode but a single season
-    if not donwload_all:
+    if not download_all:
 
         # Display episodes list and manage user selection
         last_command = display_episodes_list()
@@ -173,12 +173,12 @@ def donwload_episode(tv_name: str, index_season_selected: int, donwload_all: boo
 
         # Download selected episodes
         if len(list_episode_select) == 1 and last_command != "*":
-            donwload_video(tv_name, index_season_selected, list_episode_select[0])
+            download_video(tv_name, index_season_selected, list_episode_select[0])
 
         # Download all other episodes selecter
         else:
             for i_episode in list_episode_select:
-                donwload_video(tv_name, index_season_selected, i_episode)
+                download_video(tv_name, index_season_selected, i_episode)
 
 
 def download_series(tv_id: str, tv_name: str, version: str, domain: str) -> None:
@@ -211,14 +211,14 @@ def download_series(tv_id: str, tv_name: str, version: str, domain: str) -> None
     # Download selected episodes
     if len(list_season_select) == 1 and index_season_selected != "*":
         if 1 <= int(index_season_selected) <= seasons_count:
-            donwload_episode(tv_name, list_season_select[0])
+            download_episode(tv_name, list_season_select[0])
 
     # Dowload all seasons and episodes
     elif index_season_selected == "*":
         for i_season in list_season_select:
-            donwload_episode(tv_name, i_season, True)
+            download_episode(tv_name, i_season, True)
 
     # Download all other season selecter
     else:
         for i_season in list_season_select:
-            donwload_episode(tv_name, i_season)
+            download_episode(tv_name, i_season)
