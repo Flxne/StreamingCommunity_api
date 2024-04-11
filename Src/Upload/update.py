@@ -34,7 +34,7 @@ def update():
     # Get start of the reposity
     stargazers_count = repo_info['stargazers_count']
 
-    # Find info about latest versione deploy and the donwload count 
+    # Find info about latest versione deploy and the download count 
     last_version = release_info['name']
     down_count = release_info['assets'][0]['download_count']
 
